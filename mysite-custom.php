@@ -72,5 +72,5 @@ function mysite_send_to_webhook($entry, $form) {
 }
 add_action('gform_after_submission', 'mysite_send_to_webhook', 10, 2);
 
-// Updated label for Internship Task
+// Updated label for Internship
 // Deployment test
