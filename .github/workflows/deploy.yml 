@@ -1,0 +1,23 @@
+name: Deploy Plugin to Sandbox
+
+on:
+  push:
+    tags:
+      - 'v*'  # triggers on v1.0.0, v1.1.0, etc.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+          script: |
+            cd /var/www/html/wp-content/plugins/mysite-custom
+            git pull origin main
